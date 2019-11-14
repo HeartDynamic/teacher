@@ -1,3 +1,5 @@
+// @ts-nocheck
+
 import React, { FC } from 'react'
 import { Router } from '@reach/router'
 import styled from '@emotion/styled'
@@ -16,6 +18,7 @@ import Task from '../view/Course/Task'
 import Examination from '../view/Course/Examination'
 import VolumeDetail from './Volume/detail'
 import Analysis from './Analysis'
+import WhiteBoard from '../view/Course/WhiteBoard'
 
 const MyRouter = styled(Router)`
     height: 100%;
@@ -27,6 +30,7 @@ const App: FC = () => {
             <MainRouter path='/*' />
             <PlanEditor path='plan/:planId' />
             <NewPlan path='plan/new' />
+            <WhiteBoard path='/course/:courseId/white-board' />
             <Course path='/course/'>
                 <Index path=':courseId'>
                     <Plan path='plan'></Plan>

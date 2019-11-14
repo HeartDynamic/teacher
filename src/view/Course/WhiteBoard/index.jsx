@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from 'react'
 import styled from '@emotion/styled'
 import { SketchField, Tools } from 'react-sketch'
+import { navigate } from '@reach/router'
 
 import ToolBar from './ToolBar'
 
@@ -9,7 +10,7 @@ const Container = styled.div`
     height: 100%;
 `
 
-const WhiteBoard = () => {
+const WhiteBoard = props => {
     const ref = useRef(null)
     const [currentTool, setCurrentTool] = useState(Tools.Pencil)
     const [currentColor, setCurrentColor] = useState('#000')
@@ -41,7 +42,7 @@ const WhiteBoard = () => {
     // todo 此处需要真正的退出代码
     const handleExit = () => {
         console.log(data)
-        ref.current.fromJSON(JSON.parse(data))
+        navigate(`/course/${props.courseId}/plan`)
     }
 
     const handleAddText = () => {
