@@ -181,6 +181,11 @@ interface ITestAcademicAnalysisStudent {
     worstLores: IBestLore[]
 }
 
+interface IWhiteBoard {
+    courseId: number
+    content: string
+}
+
 export interface ICourseIndexStore {
     typeArrData: ITypeArrData[]
 
@@ -214,12 +219,18 @@ export interface ICourseIndexStore {
     testAcademicAnalysisVolumeReady: boolean
     testAcademicAnalysisVolume: ITestAcademicAnalysisVolume
     testAcademicAnalysisVolumeID: ITestAcademicAnalysisVolumeID
-    getTestAcademicAnalysisVolume(data: ITestAcademicAnalysisVolumeID): Promise<void>
+    getTestAcademicAnalysisVolume(
+        data: ITestAcademicAnalysisVolumeID
+    ): Promise<void>
 
     gettingTestAcademicAnalysisStudent: boolean
     testAcademicAnalysisStudentReady: boolean
     testAcademicAnalysisStudent: ITestAcademicAnalysisStudent
     getTestAcademicAnalysisStudent(studentId: number): Promise<void>
+
+    getWhiteBoard(courseId: number): Promise<void>
+    whiteBoardReady: boolean
+    upsertWhiteBoard(data: IWhiteBoard): Promise<void>
 }
 
 class CourseIndexStore implements ICourseIndexStore {
@@ -315,7 +326,13 @@ class CourseIndexStore implements ICourseIndexStore {
     @observable gettingTestAcademicAnalysisVolume = false
     @observable testAcademicAnalysisVolumeReady = false
     @observable testAcademicAnalysisVolume = {
-        bestLore: { id: 0, name: '', avgAccuracy: 0, trueLoreCount: 0, totalLoreCount: 0 },
+        bestLore: {
+            id: 0,
+            name: '',
+            avgAccuracy: 0,
+            trueLoreCount: 0,
+            totalLoreCount: 0,
+        },
         loreAccuracy: 0,
         loreCount: 0,
         loreDTOList: [],
@@ -324,7 +341,13 @@ class CourseIndexStore implements ICourseIndexStore {
         testName: '',
         totalRank: 0,
         weaknessLoreCount: 0,
-        worstLore: { id: 0, name: '', avgAccuracy: 0, trueLoreCount: 0, totalLoreCount: 0 },
+        worstLore: {
+            id: 0,
+            name: '',
+            avgAccuracy: 0,
+            trueLoreCount: 0,
+            totalLoreCount: 0,
+        },
     }
     @observable testAcademicAnalysisVolumeID = {
         id: 0,
@@ -348,6 +371,8 @@ class CourseIndexStore implements ICourseIndexStore {
         gradeRanking: 0,
         worstLores: [],
     }
+
+    @observable whiteBoardReady = false
 
     @action DataProcessing(data: any) {
         let res = data
@@ -375,7 +400,9 @@ class CourseIndexStore implements ICourseIndexStore {
             }
 
             if (typeof res.teacherPostilion === 'string') {
-                res.teacherPostilion = Value.fromJSON(JSON.parse(res.teacherPostilion))
+                res.teacherPostilion = Value.fromJSON(
+                    JSON.parse(res.teacherPostilion)
+                )
             } else {
                 res.teacherPostilion = Value.fromJSON({
                     document: {
@@ -398,12 +425,23 @@ class CourseIndexStore implements ICourseIndexStore {
         this.gettingTestProblem = true
         const res = await api.course.getStudentTest(id)
         if (res.success) {
-            let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
+            let sessionCurrentType = sessionStorage.getItem(
+                'sessionCurrentType'
+            )
             if (sessionCurrentType) {
                 let datas = JSON.parse(sessionCurrentType)
-                if ((res.data.studentVolume as any)[datas.type][datas.number - 1]) {
-                    let id = (res.data.studentVolume as any)[datas.type][datas.number - 1].id
-                    this.getStudentTestProblem({ id, testId: res.data.studentVolume.id })
+                if (
+                    (res.data.studentVolume as any)[datas.type][
+                        datas.number - 1
+                    ]
+                ) {
+                    let id = (res.data.studentVolume as any)[datas.type][
+                        datas.number - 1
+                    ].id
+                    this.getStudentTestProblem({
+                        id,
+                        testId: res.data.studentVolume.id,
+                    })
                     this.currentProblemDetailData = {
                         id: datas.id,
                         number: datas.number,
@@ -416,7 +454,10 @@ class CourseIndexStore implements ICourseIndexStore {
                     })
                 }
             } else {
-                this.getStudentTestProblem({ id: res.data.studentVolume.key.id, testId: res.data.studentVolume.id })
+                this.getStudentTestProblem({
+                    id: res.data.studentVolume.key.id,
+                    testId: res.data.studentVolume.id,
+                })
                 this.currentProblemDetailData = {
                     id: res.data.studentVolume.key.id,
                     number: 1,
@@ -459,7 +500,9 @@ class CourseIndexStore implements ICourseIndexStore {
         })
         if (res.success) {
             this.gettingTestProblemDetail = false
-            this.testProblemDetailData = this.DataProcessing(res.data.testProblem)
+            this.testProblemDetailData = this.DataProcessing(
+                res.data.testProblem
+            )
             this.testProblemDetailReady = true
         }
     }
@@ -480,11 +523,15 @@ class CourseIndexStore implements ICourseIndexStore {
             this.loreDTOList = res.data.loreDTOList
             this.volumeDTO = res.data.volumeDTO
             this.studentVolume = res.data.volumeDTO
-            let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
+            let sessionCurrentType = sessionStorage.getItem(
+                'sessionCurrentType'
+            )
             if (sessionCurrentType) {
                 let datas = JSON.parse(sessionCurrentType)
                 if ((res.data.volumeDTO as any)[datas.type][datas.number - 1]) {
-                    let id = (res.data.volumeDTO as any)[datas.type][datas.number - 1].id
+                    let id = (res.data.volumeDTO as any)[datas.type][
+                        datas.number - 1
+                    ].id
                     this.getTestProblem({ id, testId: res.data.volumeDTO.id })
                     this.currentProblemDetailData = {
                         id: datas.id,
@@ -498,7 +545,10 @@ class CourseIndexStore implements ICourseIndexStore {
                     })
                 }
             } else {
-                this.getTestProblem({ id: res.data.volumeDTO.key.id, testId: res.data.volumeDTO.id })
+                this.getTestProblem({
+                    id: res.data.volumeDTO.key.id,
+                    testId: res.data.volumeDTO.id,
+                })
                 this.currentProblemDetailData = {
                     id: res.data.volumeDTO.key.id,
                     number: 1,
@@ -509,7 +559,9 @@ class CourseIndexStore implements ICourseIndexStore {
     }
 
     //学情分析（试卷）
-    @action async getTestAcademicAnalysisVolume(data: ITestAcademicAnalysisVolumeID) {
+    @action async getTestAcademicAnalysisVolume(
+        data: ITestAcademicAnalysisVolumeID
+    ) {
         this.gettingTestAcademicAnalysisVolume = true
         const res = await api.course.getTestAcademicAnalysisVolume(data)
         if (res.success) {
@@ -521,12 +573,23 @@ class CourseIndexStore implements ICourseIndexStore {
     //学情分析（个人）
     @action async getTestAcademicAnalysisStudent(studentId: number) {
         this.gettingTestAcademicAnalysisStudent = true
-        const res = await api.course.getTestAcademicAnalysisStudent({ studentId })
+        const res = await api.course.getTestAcademicAnalysisStudent({
+            studentId,
+        })
         if (res.success) {
             this.testAcademicAnalysisStudent = res.data
             this.gettingTestAcademicAnalysisStudent = false
             this.testAcademicAnalysisStudentReady = true
         }
+    }
+
+    @action async getWhiteBoard(courseId: number) {
+        const res = await api.course.getWhiteBoard(courseId)
+        console.log(res)
+    }
+    @action async upsertWhiteBoard(data: IWhiteBoard) {
+        const res = await api.course.upsertWhiteBoadr(data)
+        console.log(res)
     }
 }
 

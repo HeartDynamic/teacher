@@ -1,7 +1,9 @@
-import React, { useRef, useState, useEffect } from 'react'
+import React, { useRef, useState, useEffect, useContext } from 'react'
 import styled from '@emotion/styled'
 import { SketchField, Tools } from 'react-sketch'
 import { navigate } from '@reach/router'
+import { MobXProviderContext } from 'mobx-react'
+import { useObserver } from 'mobx-react-lite'
 
 import ToolBar from './ToolBar'
 
@@ -15,7 +17,6 @@ const WhiteBoard = props => {
     const [currentTool, setCurrentTool] = useState(Tools.Pencil)
     const [currentColor, setCurrentColor] = useState('#000')
     const [currentWeight, setCurrentWeight] = useState(4)
-    const [data, setData] = useState(null)
 
     const handleChangeTool = tool => {
         setCurrentTool(tool)
@@ -35,13 +36,14 @@ const WhiteBoard = props => {
 
     // todo 此处需要真正的保存代码
     const handleSave = () => {
-        console.log(JSON.stringify(ref.current.toJSON()))
-        setData(JSON.stringify(ref.current.toJSON()))
+        courseIndexStore.upsertWhiteBoard({
+            courseId: props.courseId,
+            content: JSON.stringify(ref.current.toJSON()),
+        })
     }
 
     // todo 此处需要真正的退出代码
     const handleExit = () => {
-        console.log(data)
         navigate(`/course/${props.courseId}/plan`)
     }
 
@@ -65,6 +67,10 @@ const WhiteBoard = props => {
         }
         document.addEventListener('keydown', eventHandler)
         return () => document.removeEventListener('keydown', eventHandler)
+    }, [])
+    const { courseIndexStore } = useContext(MobXProviderContext)
+    useEffect(() => {
+        courseIndexStore.getWhiteBoard(props.courseId)
     }, [])
     return (
         <Container id='white-board'>
