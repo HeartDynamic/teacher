@@ -33,17 +33,17 @@ const App: FC = () => {
             <WhiteBoard path='/course/:courseId/white-board' />
             <Course path='/course/'>
                 <Index path=':courseId'>
-                    <Plan path='plan'></Plan>
-                    <Preparation path='preparation'></Preparation>
-                    <Preview path='preview'></Preview>
-                    <ClassTest path='classTest'></ClassTest>
-                    <Task path='task'></Task>
-                    <Examination path='examination'></Examination>
+                    <Plan path='plan' />
+                    <Preparation path='preparation' />
+                    <Preview path='preview' />
+                    <ClassTest path='classTest' />
+                    <Task path='task' />
+                    <Examination path='examination' />
                 </Index>
             </Course>
-            <VolumeDetail path='see/volume/:id'></VolumeDetail>
-            <NewPreparation path='/course/:courseId/preparation/new'></NewPreparation>
-            <Analysis path='analysis'></Analysis>
+            <VolumeDetail path='see/volume/:id'/>
+            <NewPreparation path='/course/:courseId/preparation/new'/>
+            <Analysis path='analysis'/>
         </MyRouter>
     )
 }

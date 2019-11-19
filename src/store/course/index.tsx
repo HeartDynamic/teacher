@@ -231,6 +231,7 @@ export interface ICourseIndexStore {
     getWhiteBoard(courseId: number): Promise<void>
     whiteBoardReady: boolean
     upsertWhiteBoard(data: IWhiteBoard): Promise<void>
+    whiteBoard: string
 }
 
 class CourseIndexStore implements ICourseIndexStore {
@@ -373,6 +374,7 @@ class CourseIndexStore implements ICourseIndexStore {
     }
 
     @observable whiteBoardReady = false
+    @observable whiteBoard = ''
 
     @action DataProcessing(data: any) {
         let res = data
@@ -585,11 +587,13 @@ class CourseIndexStore implements ICourseIndexStore {
 
     @action async getWhiteBoard(courseId: number) {
         const res = await api.course.getWhiteBoard(courseId)
-        console.log(res)
+        if(res.success) {
+            this.whiteBoard = JSON.parse(res.data.content) || ''
+            this.whiteBoardReady = true
+        }
     }
     @action async upsertWhiteBoard(data: IWhiteBoard) {
-        const res = await api.course.upsertWhiteBoadr(data)
-        console.log(res)
+        await api.course.upsertWhiteBoadr(data)
     }
 }
 

@@ -5,6 +5,8 @@ import { navigate } from '@reach/router'
 import { MobXProviderContext } from 'mobx-react'
 import { useObserver } from 'mobx-react-lite'
 
+import Loading from '../../../components/Loading'
+
 import ToolBar from './ToolBar'
 
 const Container = styled.div`
@@ -34,7 +36,6 @@ const WhiteBoard = props => {
         setCurrentWeight(weight)
     }
 
-    // todo 此处需要真正的保存代码
     const handleSave = () => {
         courseIndexStore.upsertWhiteBoard({
             courseId: props.courseId,
@@ -42,12 +43,12 @@ const WhiteBoard = props => {
         })
     }
 
-    // todo 此处需要真正的退出代码
     const handleExit = () => {
         navigate(`/course/${props.courseId}/plan`)
     }
 
     const handleAddText = () => {
+        setCurrentTool('select')
         ref.current.addText('请在此输入文字')
     }
 
@@ -61,42 +62,55 @@ const WhiteBoard = props => {
     // * 当用户点击<backspace>或者<delete>时，删除当前所选择的元素
     useEffect(() => {
         const eventHandler = event => {
-            if (event.keyCode === 46 || event.keyCode === 8) {
-                ref.current.removeSelected()
+            if (event.target.tagName !== 'TEXTAREA') {
+                if (event.keyCode === 46 || event.keyCode === 8) {
+                    ref.current.removeSelected()
+                }
             }
         }
         document.addEventListener('keydown', eventHandler)
         return () => document.removeEventListener('keydown', eventHandler)
+        // eslint-disable-next-line
     }, [])
+
     const { courseIndexStore } = useContext(MobXProviderContext)
+
     useEffect(() => {
         courseIndexStore.getWhiteBoard(props.courseId)
+        // eslint-disable-next-line
     }, [])
-    return (
-        <Container id='white-board'>
-            <ToolBar
-                changeTool={handleChangeTool}
-                changeColor={handleChangeColor}
-                clear={handleClear}
-                changeWeight={handleChangeWeight}
-                currentTool={currentTool}
-                currentColor={currentColor}
-                currentWeight={currentWeight}
-                save={handleSave}
-                exit={handleExit}
-                addText={handleAddText}
-                undo={handleUndo}
-            ></ToolBar>
-            <SketchField
-                ref={ref}
-                width='100%'
-                height='100%'
-                tool={currentTool}
-                lineColor={currentColor}
-                lineWidth={currentWeight}
-            />
-        </Container>
-    )
+
+    return useObserver(() => {
+        if (!courseIndexStore.whiteBoardReady) {
+            return <Loading />
+        }
+        return (
+            <Container id='white-board'>
+                <ToolBar
+                    changeTool={handleChangeTool}
+                    changeColor={handleChangeColor}
+                    clear={handleClear}
+                    changeWeight={handleChangeWeight}
+                    currentTool={currentTool}
+                    currentColor={currentColor}
+                    currentWeight={currentWeight}
+                    save={handleSave}
+                    exit={handleExit}
+                    addText={handleAddText}
+                    undo={handleUndo}
+                />
+                <SketchField
+                    ref={ref}
+                    width='100%'
+                    height='100%'
+                    tool={currentTool}
+                    lineColor={currentColor}
+                    lineWidth={currentWeight}
+                    value={courseIndexStore.whiteBoard}
+                />
+            </Container>
+        )
+    })
 }
 
 export default WhiteBoard
