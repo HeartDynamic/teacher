@@ -18,16 +18,14 @@ const Line = styled.span<{ isActive: boolean }>`
 `
 const Text = styled.div<{ isActive: boolean }>`
     font-size: 22px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 400;
     transition: color 0.1s linear;
     color: ${props => (props.isActive ? '#00a6f3' : '#3a4760')};
 `
 const Item = styled(Link)`
-    display: block;
     width: 90px;
     height: 80px;
-
     cursor: pointer;
     margin-left: 25px;
     margin-right: 25px;
@@ -69,6 +67,10 @@ const Nav: FC<RouteComponentProps> = () => {
             <Item to='analysis' getProps={() => checkActive('analysis', 5)}>
                 <Text isActive={current === 5}>学情分析</Text>
                 <Line isActive={current === 5} />
+            </Item>
+            <Item to='analysis/knowledge' getProps={() => checkActive('/analysis/knowledge', 6)}>
+                <Text isActive={current === 6}>知识结构</Text>
+                <Line isActive={current === 6} />
             </Item>
         </Container>
     )

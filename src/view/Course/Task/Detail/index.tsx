@@ -40,7 +40,7 @@ const ButtonWrap1 = styled.div`
     margin: 10px 0;
 `
 
-const Detail: FC = props => {
+const Detail: FC = () => {
     const { courseTaskStore } = useContext<IStore>(MobXProviderContext)
     const [isSshowOver, setIsSshowOver] = useState(false)
 
@@ -57,7 +57,6 @@ const Detail: FC = props => {
     //查看试卷
     const handleClickSee = () => {
         navigate(`task/analysis/${courseTaskStore.task!.id}`)
-        console.log('跳转路由，跟查看分析是一样')
     }
 
     const stopButton = {
@@ -128,14 +127,14 @@ const Detail: FC = props => {
                         <Button options={stopButton} onClick={handleClickTestOver}>
                             <ButtonWrap>
                                 <ButtonText>收卷</ButtonText>
-                                <FaStopCircle></FaStopCircle>
+                                <FaStopCircle />
                             </ButtonWrap>
                         </Button>
                         &nbsp;
                         <Button options={seeButton} onClick={handleClickSee}>
                             <ButtonWrap>
                                 <ButtonText>查看试卷</ButtonText>
-                                <FaEye></FaEye>
+                                <FaEye />
                             </ButtonWrap>
                         </Button>
                     </FunctWrap>

@@ -241,6 +241,10 @@ const lore = {
 const analysis = {
     // 获取所有知识点
     getKnowledgePoints: () => request.get('/statics/lore-list/tiled/1'),
+    getTestTotalAnalysisGrade: () => request.get('/tests/total-analysis/grade'),
+    getTeacherTeams: () => request.get('/teachers/teams'),
+    getTeacherTotalAnalysis: (data: any) =>
+        request.get('/tests/total-analysis/class', data),
 }
 
 export default {
