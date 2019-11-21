@@ -111,7 +111,7 @@ const StudentList: FC<IParams> = props => {
                         </TestDTOS>
                     ))
                 ) : (
-                    <NoData></NoData>
+                    <NoData />
                 )}
             </Wrap>
         </Container>

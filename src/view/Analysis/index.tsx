@@ -56,7 +56,7 @@ const Li = styled.li<{ setStyle: boolean }>`
     line-height: 40px;
     text-align: center;
     font-size: 14px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     cursor: pointer;
     color: ${props => (props.setStyle ? '#3C94DF' : '#666')};
@@ -101,7 +101,7 @@ const AnalysisWrap: FC<RouteComponentProps> = props => {
                         <NavWrap>
                             <ButtonWrap>
                                 <Button options={buttonOption} onClick={() => handleClickLink('/')}>
-                                    <TiArrowBackOutline></TiArrowBackOutline>
+                                    <TiArrowBackOutline />
                                     <MySpan>返回首页</MySpan>
                                 </Button>
                             </ButtonWrap>

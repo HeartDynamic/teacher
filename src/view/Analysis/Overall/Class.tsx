@@ -27,7 +27,7 @@ const Knowledge = styled.div`
     box-sizing: border-box;
     height: 300px;
     padding: 20px;
-    box-shadow: 0px 2px 4px 0px rgba(100, 115, 219, 0.09);
+    box-shadow: 0 2px 4px 0 rgba(100, 115, 219, 0.09);
     border-radius: 4px;
 `
 
@@ -35,7 +35,7 @@ const RadarWrap = styled.div`
     box-sizing: border-box;
     width: 510px;
     height: 300px;
-    box-shadow: 0px 2px 4px 0px rgba(100, 115, 219, 0.09);
+    box-shadow: 0 2px 4px 0 rgba(100, 115, 219, 0.09);
     border-radius: 4px;
     padding: 20px;
 `
@@ -43,7 +43,7 @@ const Package = styled.div`
     width: 100%;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 2px 4px 0px rgba(31, 122, 171, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(31, 122, 171, 0.2);
     border-radius: 6px;
     padding: 20px;
     margin-bottom: 20px;
@@ -52,13 +52,13 @@ const Package1 = styled.div`
     width: 100%;
     box-sizing: border-box;
     background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0px 2px 4px 0px rgba(31, 122, 171, 0.2);
+    box-shadow: 0 2px 4px 0 rgba(31, 122, 171, 0.2);
     border-radius: 6px;
     margin-bottom: 20px;
 `
 const LoreName = styled.div`
     font-size: 14px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(153, 153, 153, 1);
     margin-bottom: 20px;
@@ -110,7 +110,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                 typeText: '名',
                                 setColor: '#FFC821',
                             }}
-                        ></LoreNumber>
+                        />
                         <LoreNumber
                             data={{
                                 text: '测试 最高正确率',
@@ -118,7 +118,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                 typeText: '%',
                                 setColor: '#42C3D0',
                             }}
-                        ></LoreNumber>
+                        />
                     </Knowledge>
                     <Knowledge>
                         <LoreNumber
@@ -128,7 +128,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                 typeText: '个',
                                 setColor: '#6D8DD2',
                             }}
-                        ></LoreNumber>
+                        />
                         <LoreNumber
                             data={{
                                 text: '薄弱知识点',
@@ -136,7 +136,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                 typeText: '个',
                                 setColor: '#996DD2',
                             }}
-                        ></LoreNumber>
+                        />
                     </Knowledge>
                     <RadarWrap>
                         {analysisStore.teacherTotalAnalysisReady ? (
@@ -179,7 +179,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                     index,
                                     colorArr: ['#23710C', '#219600', '#29C000', '#6FD554', '#9EE379'],
                                 }}
-                            ></LoreList>
+                            />
                         ))}
                     </Knowledge>
                     <Knowledge>
@@ -191,7 +191,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                                     index,
                                     colorArr: ['#780000', '#AF0F0F', '#E33939', '#F66868', '#F18787'],
                                 }}
-                            ></LoreList>
+                            />
                         ))}
                     </Knowledge>
                 </KnowledgeWrap1>
@@ -203,7 +203,7 @@ const Class: FC<RouteComponentProps<IProps>> = props => {
                             url: `${props.uri}`,
                             studentList: analysisStore.teacherTotalAnalysis.classStudentRanking,
                         }}
-                    ></StudentList>
+                    />
                 </Package1>
             </Container>
         )
