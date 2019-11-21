@@ -5,7 +5,7 @@ import Toast from './components/Toast'
 
 export const instance = axios.create({
     baseURL: process.env.NODE_ENV === 'production' ? 'https://api.likeyun.net' : '',
-    // baseURL: 'http://192.168.0.105:8080/step',
+    // baseURL: 'http://192.168.0.104:8080/step',
     timeout: 5000,
 })
 
@@ -177,7 +177,7 @@ const course = {
     bindingClassTest: (data: any) => request.post('/tests/1', data),
     bindingTask: (data: any) => request.post('/tests/2', data),
     bindingExamination: (data: any) => request.post('/tests/3', data),
-    publishVolume: (id: number) => request.put(`/tests/publish/${id}`),
+    publishVolume: (data: any) => request.put(`/tests/publish`, data),
     testsStudentCheck: (data: any) => request.put(` /tests/students/check`, data),
     preparationCreate: (data: any) => request.post(`/preparation/create`, data),
     getVolumeLore: () => request.get(`/volumes-lore`),
@@ -200,6 +200,9 @@ const lore = {
 const analysis = {
     // 获取所有知识点
     getKnowledgePoints: () => request.get('/statics/lore-list/tiled/1'),
+    getTestTotalAnalysisGrade: () => request.get('/tests/total-analysis/grade'),
+    getTeacherTeams: () => request.get('/teachers/teams'),
+    getTeacherTotalAnalysis: (data: any) => request.get('/tests/total-analysis/class', data),
 }
 
 export default {

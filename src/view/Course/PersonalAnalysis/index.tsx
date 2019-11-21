@@ -158,7 +158,7 @@ const PersonalAnalysis: FC<RouteComponentProps<IProps>> = props => {
                 <Container>
                     <Wrap>
                         <Header>
-                            <Back data={{ url: props.uri }}></Back>
+                            <Back data={{ url: props.uri, returnLine: props.location!.state.returnLine }}></Back>
                             <StudentInfo>
                                 <Student>
                                     <StudentType>学生</StudentType>
@@ -171,13 +171,14 @@ const PersonalAnalysis: FC<RouteComponentProps<IProps>> = props => {
                         </Header>
                         <KnowledgeWrap>
                             <Knowledge>
-                                <Pie
-                                    text='总体知识点正确率'
-                                    data={{
-                                        id: courseIndexStore.testAcademicAnalysisStudent.totalAccuracy,
-                                        avgAccuracy: courseIndexStore.testAcademicAnalysisStudent.totalAccuracy,
-                                    }}
-                                ></Pie>
+                                {courseIndexStore.gettingTestAcademicAnalysisStudent ? (
+                                    <Pie
+                                        text='总体知识点正确率'
+                                        data={{
+                                            avgAccuracy: courseIndexStore.testAcademicAnalysisStudent.totalAccuracy,
+                                        }}
+                                    ></Pie>
+                                ) : null}
                             </Knowledge>
                             <Knowledge1>
                                 <Knowledge2>
@@ -220,34 +221,38 @@ const PersonalAnalysis: FC<RouteComponentProps<IProps>> = props => {
                                 ></LoreNumber>
                             </Knowledge>
                             <RadarWrap>
-                                <Radar
-                                    data={{
-                                        indicator: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
-                                            item => {
-                                                return { max: item.max, name: item.name }
-                                            }
-                                        ),
-                                        series: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
-                                            item => {
-                                                return item.accuracy
-                                            }
-                                        ),
-                                        labels: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
-                                            item => {
-                                                return item.name
-                                            }
-                                        ),
-                                        textStyle: {
-                                            titleText: '章节知识点正确率雷达图',
-                                        },
-                                    }}
-                                ></Radar>
+                                {courseIndexStore.gettingTestAcademicAnalysisStudent ? (
+                                    <Radar
+                                        data={{
+                                            indicator: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
+                                                item => {
+                                                    return { max: item.max, name: item.name }
+                                                }
+                                            ),
+                                            series: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
+                                                item => {
+                                                    return item.accuracy
+                                                }
+                                            ),
+                                            labels: courseIndexStore.testAcademicAnalysisStudent.sectionLoreAccuracy.map(
+                                                item => {
+                                                    return item.name
+                                                }
+                                            ),
+                                            textStyle: {
+                                                titleText: '章节知识点正确率雷达图',
+                                            },
+                                        }}
+                                    ></Radar>
+                                ) : null}
                             </RadarWrap>
                         </KnowledgeWrap>
                         <Package>
                             <LoreName>总体知识点正确率变化</LoreName>
                             <LineWrap>
-                                <Line data={courseIndexStore.testAcademicAnalysisStudent.loreAccuracyChange}></Line>
+                                {courseIndexStore.gettingTestAcademicAnalysisStudent ? (
+                                    <Line data={courseIndexStore.testAcademicAnalysisStudent.loreAccuracyChange}></Line>
+                                ) : null}
                             </LineWrap>
                         </Package>
                         <KnowledgeWrap1>

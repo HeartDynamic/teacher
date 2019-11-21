@@ -57,7 +57,6 @@ const Detail: FC = props => {
     //查看试卷
     const handleClickSee = () => {
         navigate(`task/analysis/${courseTaskStore.task!.id}`)
-        console.log('跳转路由，跟查看分析是一样')
     }
 
     const stopButton = {
@@ -108,7 +107,7 @@ const Detail: FC = props => {
     }
     const optionDialog = {
         width: '20%',
-        marginTop: '160px ',
+        // marginTop: '160px ',
         borderBottom: ' 1px solid rgba(151, 151, 151, 0.26)',
     }
 
@@ -116,11 +115,8 @@ const Detail: FC = props => {
         return (
             <Container>
                 <SituationWrap>
-                    <Finished text='已交' people={courseTaskStore.doTaskInfo && courseTaskStore.doTaskInfo.finished} />
-                    <Finished
-                        text='未交'
-                        people={courseTaskStore.doTaskInfo && courseTaskStore.doTaskInfo.Unfiltered}
-                    />
+                    <Finished text='已交' people={courseTaskStore.doTaskInfo!.finished} />
+                    <Finished text='未交' people={courseTaskStore.doTaskInfo!.Unfiltered} />
                 </SituationWrap>
                 <StudentWrap>
                     <Student />

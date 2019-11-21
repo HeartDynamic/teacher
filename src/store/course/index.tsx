@@ -396,6 +396,7 @@ class CourseIndexStore implements ICourseIndexStore {
     //试卷详情
     @action async getTestProblemEntering(id: number) {
         this.gettingTestProblem = true
+        this.testProblemReady = false
         const res = await api.course.getStudentTest(id)
         if (res.success) {
             let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
@@ -474,12 +475,14 @@ class CourseIndexStore implements ICourseIndexStore {
 
     //试卷情况-题目分析
     @action async getTestAccuracy(id: number) {
+        this.gettingTestAccuracy = false
         const res = await api.course.getTestAccuracy(id)
         if (res.success) {
             this.gradeDataDTO = res.data.gradeDataDTO
             this.loreDTOList = res.data.loreDTOList
             this.volumeDTO = res.data.volumeDTO
             this.studentVolume = res.data.volumeDTO
+            this.gettingTestAccuracy = true
             let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
             if (sessionCurrentType) {
                 let datas = JSON.parse(sessionCurrentType)
@@ -510,21 +513,21 @@ class CourseIndexStore implements ICourseIndexStore {
 
     //学情分析（试卷）
     @action async getTestAcademicAnalysisVolume(data: ITestAcademicAnalysisVolumeID) {
-        this.gettingTestAcademicAnalysisVolume = true
+        this.gettingTestAcademicAnalysisVolume = false
         const res = await api.course.getTestAcademicAnalysisVolume(data)
         if (res.success) {
             this.testAcademicAnalysisVolume = res.data
-            this.gettingTestAcademicAnalysisVolume = false
+            this.gettingTestAcademicAnalysisVolume = true
             this.testAcademicAnalysisVolumeReady = true
         }
     }
     //学情分析（个人）
     @action async getTestAcademicAnalysisStudent(studentId: number) {
-        this.gettingTestAcademicAnalysisStudent = true
+        this.gettingTestAcademicAnalysisStudent = false
         const res = await api.course.getTestAcademicAnalysisStudent({ studentId })
         if (res.success) {
             this.testAcademicAnalysisStudent = res.data
-            this.gettingTestAcademicAnalysisStudent = false
+            this.gettingTestAcademicAnalysisStudent = true
             this.testAcademicAnalysisStudentReady = true
         }
     }
