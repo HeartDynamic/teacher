@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { action, observable } from 'mobx'
 // import { navigate } from '@reach/router'
 import { Value } from 'slate'
 
@@ -181,6 +181,11 @@ interface ITestAcademicAnalysisStudent {
     worstLores: IBestLore[]
 }
 
+interface IWhiteBoard {
+    courseId: number
+    content: string
+}
+
 export interface ICourseIndexStore {
     typeArrData: ITypeArrData[]
 
@@ -220,6 +225,11 @@ export interface ICourseIndexStore {
     testAcademicAnalysisStudentReady: boolean
     testAcademicAnalysisStudent: ITestAcademicAnalysisStudent
     getTestAcademicAnalysisStudent(studentId: number): Promise<void>
+
+    getWhiteBoard(courseId: number): Promise<void>
+    whiteBoardReady: boolean
+    upsertWhiteBoard(data: IWhiteBoard): Promise<void>
+    whiteBoard: string
 }
 
 class CourseIndexStore implements ICourseIndexStore {
@@ -315,7 +325,13 @@ class CourseIndexStore implements ICourseIndexStore {
     @observable gettingTestAcademicAnalysisVolume = false
     @observable testAcademicAnalysisVolumeReady = false
     @observable testAcademicAnalysisVolume = {
-        bestLore: { id: 0, name: '', avgAccuracy: 0, trueLoreCount: 0, totalLoreCount: 0 },
+        bestLore: {
+            id: 0,
+            name: '',
+            avgAccuracy: 0,
+            trueLoreCount: 0,
+            totalLoreCount: 0,
+        },
         loreAccuracy: 0,
         loreCount: 0,
         loreDTOList: [],
@@ -324,7 +340,13 @@ class CourseIndexStore implements ICourseIndexStore {
         testName: '',
         totalRank: 0,
         weaknessLoreCount: 0,
-        worstLore: { id: 0, name: '', avgAccuracy: 0, trueLoreCount: 0, totalLoreCount: 0 },
+        worstLore: {
+            id: 0,
+            name: '',
+            avgAccuracy: 0,
+            trueLoreCount: 0,
+            totalLoreCount: 0,
+        },
     }
     @observable testAcademicAnalysisVolumeID = {
         id: 0,
@@ -348,6 +370,9 @@ class CourseIndexStore implements ICourseIndexStore {
         gradeRanking: 0,
         worstLores: [],
     }
+
+    @observable whiteBoardReady = false
+    @observable whiteBoard = ''
 
     @action DataProcessing(data: any) {
         let res = data
@@ -404,7 +429,10 @@ class CourseIndexStore implements ICourseIndexStore {
                 let datas = JSON.parse(sessionCurrentType)
                 if ((res.data.studentVolume as any)[datas.type][datas.number - 1]) {
                     let id = (res.data.studentVolume as any)[datas.type][datas.number - 1].id
-                    this.getStudentTestProblem({ id, testId: res.data.studentVolume.id })
+                    this.getStudentTestProblem({
+                        id,
+                        testId: res.data.studentVolume.id,
+                    })
                     this.currentProblemDetailData = {
                         id: datas.id,
                         number: datas.number,
@@ -417,7 +445,10 @@ class CourseIndexStore implements ICourseIndexStore {
                     })
                 }
             } else {
-                this.getStudentTestProblem({ id: res.data.studentVolume.key.id, testId: res.data.studentVolume.id })
+                this.getStudentTestProblem({
+                    id: res.data.studentVolume.key.id,
+                    testId: res.data.studentVolume.id,
+                })
                 this.currentProblemDetailData = {
                     id: res.data.studentVolume.key.id,
                     number: 1,
@@ -501,7 +532,10 @@ class CourseIndexStore implements ICourseIndexStore {
                     })
                 }
             } else {
-                this.getTestProblem({ id: res.data.volumeDTO.key.id, testId: res.data.volumeDTO.id })
+                this.getTestProblem({
+                    id: res.data.volumeDTO.key.id,
+                    testId: res.data.volumeDTO.id,
+                })
                 this.currentProblemDetailData = {
                     id: res.data.volumeDTO.key.id,
                     number: 1,
@@ -530,6 +564,18 @@ class CourseIndexStore implements ICourseIndexStore {
             this.gettingTestAcademicAnalysisStudent = true
             this.testAcademicAnalysisStudentReady = true
         }
+    }
+
+    @action async getWhiteBoard(courseId: number) {
+        this.whiteBoardReady = false
+        const res = await api.course.getWhiteBoard(courseId)
+        if (res.success) {
+            this.whiteBoard = res.data ? JSON.parse(res.data.content) : ''
+            this.whiteBoardReady = true
+        }
+    }
+    @action async upsertWhiteBoard(data: IWhiteBoard) {
+        await api.course.upsertWhiteBoadr(data)
     }
 }
 

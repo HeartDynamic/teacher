@@ -67,7 +67,7 @@ const BarStackedStrip: FC<IProps> = props => {
                     data: props.data.excellent,
                     itemStyle: {
                         normal: {
-                            color: function(params: any) {
+                            color: function() {
                                 return colorList[4]
                             },
                         },
@@ -86,7 +86,7 @@ const BarStackedStrip: FC<IProps> = props => {
                     data: props.data.fine,
                     itemStyle: {
                         normal: {
-                            color: function(params: any) {
+                            color: function() {
                                 return colorList[3]
                             },
                         },
@@ -105,7 +105,7 @@ const BarStackedStrip: FC<IProps> = props => {
                     data: props.data.medium,
                     itemStyle: {
                         normal: {
-                            color: function(params: any) {
+                            color: function() {
                                 return colorList[2]
                             },
                         },
@@ -124,7 +124,7 @@ const BarStackedStrip: FC<IProps> = props => {
                     data: props.data.poor,
                     itemStyle: {
                         normal: {
-                            color: function(params: any) {
+                            color: function() {
                                 return colorList[1]
                             },
                         },
@@ -143,7 +143,7 @@ const BarStackedStrip: FC<IProps> = props => {
                     data: props.data.bad,
                     itemStyle: {
                         normal: {
-                            color: function(params: any) {
+                            color: function() {
                                 return colorList[0]
                             },
                         },

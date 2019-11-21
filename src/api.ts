@@ -133,12 +133,12 @@ const plan = {
 const volume = {
     getVolumeList: (data: any) => request.get('/volume-lists', data),
     deleteVolume: (id: number) => request.del(`/volumes/delete/${id}`),
-    getVolumeTemplateList: (data: any) => request.get(`/volumes/template-lists`, data),
-    createVolumeTemplate: () => request.post(`/volumes/template-create`),
+    getVolumeTemplateList: (data: any) => request.get('/volumes/template-lists', data),
+    createVolumeTemplate: () => request.post('/volumes/template-create'),
     deleteVolumeTemplate: (id: number) => request.del(`/volumes/template-delete/${id}`),
     getVolumeTemplateDetail: (id: number) => request.get(`/volumes/template-detail/${id}`),
     updateVolumeTemplate: (data: any) => request.put('/volumes/template-update', data),
-    createVolume: (data: any) => request.post(`/volumes`, data),
+    createVolume: (data: any) => request.post('/volumes', data),
     getVolume: (id: number) => request.get(`/volumes/${id}`),
     getVolumeProblem: (id: number) => request.get(`/volumes/problem/${id}`),
     removeVolumeProblem: (data: any) => request.del(`/volumes/problem-delete/${data.volumeId}/${data.id}`),
@@ -146,19 +146,19 @@ const volume = {
     updateVolumeName: (data: any) => request.put('/volumes/update-name', data),
     getVolumeProblemAll: (id: number) => request.get(`/volumes/problem-all/${id}`),
     getVolumeOutline: (id: number) => request.get(`/volumes/outline/${id}`),
-    getVolumeProblemState: (data: any) => request.get(`/volumes/problem-state`, data),
+    getVolumeProblemState: (data: any) => request.get('/volumes/problem-state', data),
     getVolumeProblemSimple: (id: number) => request.get(`volumes/problem-simple/${id}`),
     updateVolumeOutline: (data: any) => request.put('/volumes/outline/update', data),
     updateVolumeFinish: (data: any) => request.put('/volumes/finish', data),
 }
 
 const exercise = {
-    getProblemList: (data: any) => request.get(`/problem-lists`, data),
-    getProblemTypeList: (data: any) => request.get(`/problem-type-lists`, data),
+    getProblemList: (data: any) => request.get('/problem-lists', data),
+    getProblemTypeList: (data: any) => request.get('/problem-type-lists', data),
     getProblem: (id: number) => request.get(`/problems/${id}`),
     addProblem: (data: any) => request.post('/problems', data),
     editProblem: (data: any) => request.put('/problems/update', data),
-    getLoreList: (data?: any) => request.get(`/lore-list`, data),
+    getLoreList: (data?: any) => request.get('/lore-list', data),
 }
 
 const course = {
@@ -186,14 +186,17 @@ const course = {
     getStudentTestProblem: (data: any) => request.get(`/course/student-test/${data.testId}/${data.id}`),
     getTestAccuracy: (id: number) => request.get(`/tests/accuracy/${id}`),
     getTestProblem: (data: any) => request.get(`/tests/problem/${data.testId}/${data.id}`),
-    getTestAcademicAnalysisVolume: (data: any) => request.get(`/tests/academic-analysis/volume`, data),
-    getTestAcademicAnalysisStudent: (data: any) => request.get(`/tests/academic-analysis/student`, data),
+    getTestAcademicAnalysisVolume: (data: any) => request.get('/tests/academic-analysis/volume', data),
+    getTestAcademicAnalysisStudent: (data: any) => request.get('/tests/academic-analysis/student', data),
+
+    getWhiteBoard: (id: number) => request.get(`/black-board/get/${id}`),
+    upsertWhiteBoadr: (data: any) => request.post('/black-board/upsert', data),
 }
 const lore = {
     getProblemLoreLlist: (problemId: number) => request.get(`/problem-lore/list/${problemId}`),
     postProblemLore: (data: any) => request.post(`/problem/${data.problemId}/lores/${data.loreId}/${data.problemType}`),
     deleteProblemLore: (data: any) => request.del(`/problem/${data.problemId}/lores/${data.loreId}`),
-    getLore: (data: any) => request.get(`/lore-top-ten`, data),
+    getLore: (data: any) => request.get('/lore-top-ten', data),
     createLore: (data: any) => request.post('/lore/create', data),
     removeLore: (data: any) => request.del(`/lore/delete-connect/${data.id}/${data.programId}`),
 }
