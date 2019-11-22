@@ -12,6 +12,8 @@ import { courseExaminationStore, ICourseExaminationStore } from './course/examin
 import { exerciseStore, IExerciseStore } from './exercise'
 import { analysisStore, IAnalysisStore } from './analysis'
 
+import {pointStore, IPointStore} from './point'
+
 export interface IStore {
     userStore: IUserStore
     classTableStore: IClassTableStore
@@ -26,6 +28,7 @@ export interface IStore {
     courseExaminationStore: ICourseExaminationStore
     exerciseStore: IExerciseStore
     analysisStore: IAnalysisStore
+    pointStore: IPointStore
 }
 
 export const store: IStore = {
@@ -42,4 +45,5 @@ export const store: IStore = {
     courseExaminationStore,
     exerciseStore,
     analysisStore,
+    pointStore
 }
