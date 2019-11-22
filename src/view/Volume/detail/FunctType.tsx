@@ -225,7 +225,7 @@ function FunctType(props: IProps) {
             option: JSON.stringify(option),
             answer: answer.toString(),
             solution: JSON.stringify(volumeStore.volumeProblem.solution),
-            loreIdList: volumeStore.loreListId,
+            loreIdList: volumeStore.selectedPointsId,
             type: volumeStore.volumeProblem.type,
             answerCount: volumeStore.volumeProblem.answerCount,
             volumeId: volumeStore.volumeProblem.volumeId,
