@@ -5,7 +5,7 @@ import Toast from './components/Toast'
 
 export const instance = axios.create({
     baseURL: process.env.NODE_ENV === 'production' ? 'https://api.likeyun.net' : '',
-    // baseURL: 'http://192.168.0.105:8080/step',
+    // baseURL: 'http://192.168.0.104:8080/step',
     timeout: 5000,
 })
 
@@ -177,10 +177,10 @@ const course = {
     bindingClassTest: (data: any) => request.post('/tests/1', data),
     bindingTask: (data: any) => request.post('/tests/2', data),
     bindingExamination: (data: any) => request.post('/tests/3', data),
-    publishVolume: (id: number) => request.put(`/tests/publish/${id}`),
-    testsStudentCheck: (data: any) => request.put('/tests/students/check', data),
-    preparationCreate: (data: any) => request.post('/preparation/create', data),
-    getVolumeLore: () => request.get('/volumes-lore'),
+    publishVolume: (data: any) => request.put(`/tests/publish`, data),
+    testsStudentCheck: (data: any) => request.put(` /tests/students/check`, data),
+    preparationCreate: (data: any) => request.post(`/preparation/create`, data),
+    getVolumeLore: () => request.get(`/volumes-lore`),
     testOver: (id: number) => request.put(`/tests/over/${id}`),
     getStudentTest: (id: number) => request.get(`/course/student-test/${id}`),
     getStudentTestProblem: (data: any) => request.get(`/course/student-test/${data.testId}/${data.id}`),
