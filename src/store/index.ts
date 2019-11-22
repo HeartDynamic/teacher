@@ -2,7 +2,6 @@ import { userStore, IUserStore } from './user'
 import { classTableStore, IClassTableStore } from './classTable'
 import { planStore, IPlanStore } from './plan'
 import { volumeStore, IVolumeStore } from './volume'
-// import { courseStore, ICourseStore } from './course'
 import { courseIndexStore, ICourseIndexStore } from './course/index'
 import { coursePlanStore, ICoursePlanStore } from './course/plan'
 import { coursePreparationStore, ICoursePreparationStore } from './course/preparation'
@@ -18,7 +17,6 @@ export interface IStore {
     classTableStore: IClassTableStore
     planStore: IPlanStore
     volumeStore: IVolumeStore
-    // courseStore: ICourseStore
     courseIndexStore: ICourseIndexStore
     coursePlanStore: ICoursePlanStore
     coursePreparationStore: ICoursePreparationStore
@@ -35,7 +33,6 @@ export const store: IStore = {
     classTableStore,
     planStore,
     volumeStore,
-    // courseStore,
     courseIndexStore,
     coursePlanStore,
     coursePreparationStore,

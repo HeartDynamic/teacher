@@ -131,6 +131,7 @@ function FunctType(props: IProps) {
     //修改试卷结构
     const handleClickOutline = () => {
         setIsShowStructure(true)
+        volumeStore.volumeOutlineId = [] //清空删除题目id
         volumeStore.getVolumeOutline(volumeStore.volumeDetailList.id)
     }
     const handleClickClose = () => {

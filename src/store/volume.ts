@@ -425,7 +425,7 @@ class VolumeStore implements IVolumeStore {
         try {
             const res = await api.volume.getVolumeList({
                 page: page,
-                limit: 7,
+                limit: 8,
             })
             if (res.success) {
                 this.volumeList = res.data
@@ -543,6 +543,7 @@ class VolumeStore implements IVolumeStore {
         try {
             const res = await api.volume.createVolume(data)
             if (res.success) {
+                Toast.success('创建空白模板完成')
                 navigate(`/see/volume/${res.data}`)
             }
         } catch (error) {}
@@ -741,61 +742,69 @@ class VolumeStore implements IVolumeStore {
     //修改结构列表
     @action async updateVolumeOutline(data: IUpdateVolumeOutline) {
         this.gettingVolumeOutline = true
-        try {
-            const res = await api.volume.updateVolumeOutline({
-                deleteList: data.deleteList,
-                id: data.id,
-                totalScore: data.totalScore,
-                totalProblem: data.totalProblem,
-                checkboxProblems: data.checkboxProblems,
-                choiceProblems: data.choiceProblems,
-                fillingProblems: data.fillingProblems,
-                judgeProblems: data.judgeProblems,
-                shortAnswerProblems: data.shortAnswerProblems,
-            })
-            if (res.success) {
-                this.volumeDetailList = res.data
-                let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
-                let typeArr = [
-                    'choiceProblems',
-                    'checkboxProblems',
-                    'judgeProblems',
-                    'fillingProblems',
-                    'shortAnswerProblems',
-                ]
-                if (res.data.problemTypeIsExit.length === 5) {
-                    if (sessionCurrentType) {
-                        let data = JSON.parse(sessionCurrentType)
-                        this.getVolumeProblem(res.data[data.name][data.number - 1].id)
-                    } else {
-                        this.getVolumeProblem(res.data[typeArr[res.data.problemTypeIsExit[0].type - 1]][0].id)
-                    }
-                } else if (sessionCurrentType) {
+        const res = await api.volume.updateVolumeOutline({
+            deleteList: data.deleteList,
+            id: data.id,
+            totalScore: data.totalScore,
+            totalProblem: data.totalProblem,
+            checkboxProblems: data.checkboxProblems,
+            choiceProblems: data.choiceProblems,
+            fillingProblems: data.fillingProblems,
+            judgeProblems: data.judgeProblems,
+            shortAnswerProblems: data.shortAnswerProblems,
+        })
+        if (res.success) {
+            Toast.success('修改结构成功')
+            this.volumeDetailList = res.data
+            let sessionCurrentType = sessionStorage.getItem('sessionCurrentType')
+            let typeArr = [
+                'choiceProblems',
+                'checkboxProblems',
+                'judgeProblems',
+                'fillingProblems',
+                'shortAnswerProblems',
+            ]
+            if (res.data.problemTypeIsExit.length === 5) {
+                if (sessionCurrentType) {
                     let data = JSON.parse(sessionCurrentType)
-                    if (res.data[data.name][0]) {
-                        this.getVolumeProblem(res.data[data.name][0].id)
+                    if (res.data[data.name].length < data.number) {
+                        this.getVolumeProblem(res.data[data.name][res.data[data.name].length - 1].id)
+                        this.currentType = {
+                            ...data,
+                            number: res.data[data.name][res.data[data.name].length - 1].number,
+                        }
                         sessionStorage.setItem(
                             'sessionCurrentType',
                             JSON.stringify({
                                 ...data,
-                                number: 1,
+                                number: res.data[data.name][res.data[data.name].length - 1].number,
                             })
                         )
                     } else {
-                        this.volumeProblem = {
-                            answer: '',
-                            fraction: 0,
-                            id: 0,
-                            type: 0,
-                            number: 0,
-                            loreList: [],
-                            solution: '',
-                            topic: '',
-                            volumeId: res.data.id,
-                        }
+                        this.getVolumeProblem(res.data[data.name][data.number - 1].id)
                     }
-                } else if (res.data.choiceProblems.length) {
-                    this.getVolumeProblem(res.data.choiceProblems[0].id)
+                } else {
+                    this.getVolumeProblem(res.data[typeArr[res.data.problemTypeIsExit[0].type - 1]][0].id)
+                }
+            } else if (sessionCurrentType) {
+                let data = JSON.parse(sessionCurrentType)
+                if (res.data[data.name].length > 0) {
+                    if (res.data[data.name].length < data.number) {
+                        this.getVolumeProblem(res.data[data.name][res.data[data.name].length - 1].id)
+                        this.currentType = {
+                            ...data,
+                            number: res.data[data.name][res.data[data.name].length - 1].number,
+                        }
+                        sessionStorage.setItem(
+                            'sessionCurrentType',
+                            JSON.stringify({
+                                ...data,
+                                number: res.data[data.name][res.data[data.name].length - 1].number,
+                            })
+                        )
+                    } else {
+                        this.getVolumeProblem(res.data[data.name][data.number - 1].id)
+                    }
                 } else {
                     this.volumeProblem = {
                         answer: '',
@@ -809,8 +818,22 @@ class VolumeStore implements IVolumeStore {
                         volumeId: res.data.id,
                     }
                 }
+            } else if (res.data.choiceProblems.length) {
+                this.getVolumeProblem(res.data.choiceProblems[0].id)
+            } else {
+                this.volumeProblem = {
+                    answer: '',
+                    fraction: 0,
+                    id: 0,
+                    type: 0,
+                    number: 0,
+                    loreList: [],
+                    solution: '',
+                    topic: '',
+                    volumeId: res.data.id,
+                }
             }
-        } catch (error) {}
+        }
     }
 
     //预览试卷查看是否空题

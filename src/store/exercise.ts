@@ -19,7 +19,12 @@ interface IProblemList {
     solution: any
     topic: any
 }
-interface IProblemListPage {}
+interface IProblemListPage {
+    limit: number
+    offset: number
+    page: number
+    total: number
+}
 interface IGetProblemList {
     limit: number
     page: number
@@ -118,7 +123,12 @@ class ExerciseStore implements IExerciseStore {
     @observable problemListReady = false
     @observable gettingProblemList = false
     @observable problemList: IProblemList[] = []
-    @observable problemListPage: IProblemListPage = {}
+    @observable problemListPage: IProblemListPage = {
+        limit: 0,
+        offset: 0,
+        page: 0,
+        total: 0,
+    }
 
     @observable problemReady = false
     @observable gettingProblem = false
