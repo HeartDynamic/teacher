@@ -76,14 +76,14 @@ const NameType = styled.span`
     text-align: center;
     border-right: 1px solid rgba(20, 78, 94, 0.1);
     font-size: 16px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, PingFang SC, sans-serif;
     font-weight: 500;
     color: rgba(20, 78, 94, 1);
     margin-right: 20px;
 `
 const Name = styled.span`
     font-size: 18px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
 `
@@ -98,20 +98,20 @@ const NumberPeople = styled.div`
 `
 const NumberPeopleName = styled.div`
     font-size: 14px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(153, 153, 153, 1);
     margin-bottom: 10px;
 `
 const TotalCount = styled.span`
     font-size: 32px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, PingFang SC, sans-serif;
     font-weight: 500;
     color: rgba(237, 80, 131, 1);
 `
 const PassCount = styled.span`
     font-size: 20px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, PingFang SC, sans-serif;
     font-weight: 500;
     color: rgba(58, 147, 223, 1);
 `
@@ -128,7 +128,7 @@ const ChartRight = styled.div`
 
 const LoreName = styled.div`
     font-size: 14px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(153, 153, 153, 1);
     margin-bottom: 20px;

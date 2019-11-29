@@ -64,7 +64,7 @@ const ClassTest: FC<RouteComponentProps<IProps>> = props => {
         } else if (courseClassTestStore.classTest.status !== 3) {
             return <NotAnnounced />
         } else {
-            return <Entry></Entry>
+            return <Entry />
         }
     })
 }

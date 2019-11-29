@@ -142,11 +142,11 @@ function Paging(props) {
                         >
                             {isShowLeftIcon ? (
                                 <Wrap key='1'>
-                                    <FaAngleDoubleLeft></FaAngleDoubleLeft>
+                                    <FaAngleDoubleLeft />
                                 </Wrap>
                             ) : (
                                 <Wrap key='2'>
-                                    <FaEllipsisH></FaEllipsisH>
+                                    <FaEllipsisH />
                                 </Wrap>
                             )}
                         </MyLi>
@@ -172,11 +172,11 @@ function Paging(props) {
                         >
                             {isShowRightIcon ? (
                                 <Wrap key='1'>
-                                    <FaAngleDoubleRight></FaAngleDoubleRight>
+                                    <FaAngleDoubleRight />
                                 </Wrap>
                             ) : (
                                 <Wrap key='2'>
-                                    <FaEllipsisH></FaEllipsisH>
+                                    <FaEllipsisH />
                                 </Wrap>
                             )}
                         </MyLi>

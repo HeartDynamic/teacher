@@ -31,7 +31,7 @@ const Title = styled.span`
     display: inline-block;
     text-align: center;
     font-size: 16px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 500;
     color: rgba(20, 78, 94, 1);
 `
@@ -43,7 +43,7 @@ const Vertical = styled.span`
 `
 const TitleType = styled.span`
     font-size: 18px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
 `
@@ -100,13 +100,13 @@ const TotalScoreWrap = styled.div`
 const TestPaper = styled.div`
     text-align: center;
     font-size: 14px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 400;
     color: rgba(153, 153, 153, 1);
 `
 const Fraction = styled.div`
     margin-top: 10px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 500;
     color: rgba(237, 80, 131, 1);
 `
@@ -125,7 +125,7 @@ const TestTotalProblem = styled.div``
 const TotalProblem = styled.div`
     text-align: center;
     font-size: 20px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 500;
     color: rgba(58, 147, 223, 1);
 `
@@ -181,7 +181,7 @@ const SeeHeaderA: FC<IProps> = props => {
                 <FractionContainer>
                     <FeaturesWrap>
                         <RutemWrap onClick={() => handleClickLink(1)}>
-                            <TiArrowBackOutline></TiArrowBackOutline>
+                            <TiArrowBackOutline />
                             <RutemName>返回上一层</RutemName>
                         </RutemWrap>
                         <RutemWrap onClick={() => handleClickLink(2)}>
@@ -196,7 +196,7 @@ const SeeHeaderA: FC<IProps> = props => {
                             ? courseIndexStore.testAccuracy.problemAccuracy.map((item, index) => (
                                   <LiItem key={index}>
                                       <CircleWrap>
-                                          <Circle data={item}></Circle>
+                                          <Circle data={item} />
                                       </CircleWrap>
                                   </LiItem>
                               ))

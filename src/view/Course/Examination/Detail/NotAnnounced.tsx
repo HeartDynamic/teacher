@@ -95,7 +95,7 @@ const ButtonWrap1 = styled.div`
     margin: 10px 0;
 `
 
-const Detail: FC = props => {
+const Detail: FC = () => {
     const { courseExaminationStore } = useContext<IStore>(MobXProviderContext)
     const [isSshowOver, setIsSshowOver] = useState(false)
 
@@ -140,13 +140,13 @@ const Detail: FC = props => {
                         <Button onClick={handleClickTestOver}>
                             <ButtonWrap>
                                 <ButtonText>收卷</ButtonText>
-                                <FaStopCircle></FaStopCircle>
+                                <FaStopCircle />
                             </ButtonWrap>
                         </Button>
                         <Button onClick={handleClickSee}>
                             <ButtonWrap>
                                 <ButtonText>查看试卷</ButtonText>
-                                <FaEye></FaEye>
+                                <FaEye />
                             </ButtonWrap>
                         </Button>
                     </FunctWrap>

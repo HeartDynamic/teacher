@@ -41,7 +41,7 @@ const TypeName = styled.span`
     height: 90px;
     line-height: 90px;
     font-size: 16px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 500;
     color: rgba(20, 78, 94, 1);
     margin-left: 20px;
@@ -58,7 +58,7 @@ const TestName = styled.span`
     height: 90px;
     line-height: 90px;
     font-size: 18px;
-    font-family: PingFangSC;
+    font-family: PingFangSC, sans-serif;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
 `
@@ -96,7 +96,7 @@ const ButtonWrap1 = styled.div`
     margin: 10px 0;
 `
 
-const Detail: FC = props => {
+const Detail: FC = () => {
     const { courseClassTestStore } = useContext<IStore>(MobXProviderContext)
     const [isSshowOver, setIsSshowOver] = useState(false)
 
@@ -145,18 +145,18 @@ const Detail: FC = props => {
                     <Student data={courseClassTestStore.doClassTestInfo!.testDTOS} />
                 </Left>
                 <Right>
-                    <Leisure></Leisure>
+                    <Leisure />
                     <FunctWrap>
                         <Button onClick={handleClickTestOver}>
                             <ButtonWrap>
                                 <ButtonText>收卷</ButtonText>
-                                <FaStopCircle></FaStopCircle>
+                                <FaStopCircle />
                             </ButtonWrap>
                         </Button>
                         <Button onClick={handleClickSee}>
                             <ButtonWrap>
                                 <ButtonText>查看试卷</ButtonText>
-                                <FaEye></FaEye>
+                                <FaEye />
                             </ButtonWrap>
                         </Button>
                     </FunctWrap>

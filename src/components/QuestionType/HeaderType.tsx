@@ -18,7 +18,7 @@ const KnowledgeWrap = styled.div`
 const TypeNumber = styled.span`
     box-sizing: border-box;
     font-size: 14px;
-    font-family: PingFangSC-Light, PingFang SC;
+    font-family: PingFangSC-Light, PingFang SC, sans-serif;
     font-weight: 300;
     color: rgba(237, 73, 126, 1);
     height: 36px;
@@ -42,7 +42,7 @@ interface ILoreList {
     id: number
     name: string
 }
-interface Iprops {
+interface IProps {
     data: {
         id?: number | 0
         type: number
@@ -52,16 +52,12 @@ interface Iprops {
     onClickSelect(): void
 }
 
-const HeaderType: FC<Iprops> = props => {
+const HeaderType: FC<IProps> = props => {
     const [typeArr] = useState(['单选题', '多选题', '判断题', '填空题', '解答题'])
 
     //去编辑
     const handleClickLink = () => {
         navigate(`/exercise/${props.data.id}`)
-    }
-
-    const haneleClickSelect = () => {
-        props.onClickSelect()
     }
 
     const optionButton = {
@@ -81,10 +77,10 @@ const HeaderType: FC<Iprops> = props => {
             </KnowledgeWrap>
             {props.data.showEditPick === 1 ? (
                 <FontWrap title='点击编辑' onClick={handleClickLink}>
-                    <FiEdit></FiEdit>
+                    <FiEdit />
                 </FontWrap>
             ) : props.data.showEditPick === 2 ? (
-                <Button options={optionButton} onClick={haneleClickSelect}>
+                <Button options={optionButton} onClick={() => props.onClickSelect()}>
                     选择
                 </Button>
             ) : null}

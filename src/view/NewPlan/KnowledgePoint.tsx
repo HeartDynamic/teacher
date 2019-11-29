@@ -12,7 +12,6 @@ const Container = styled.div`
     box-sizing: border-box;
     padding: 15px;
 `
-
 const Content = styled.div`
     min-height: 120px;
     margin-top: 10px;

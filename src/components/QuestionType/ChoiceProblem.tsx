@@ -40,7 +40,7 @@ const Index = styled.div`
 const Fraction = styled.div`
     border-top: 1px solid #e2eef4;
     font-size: 12px;
-    font-family: PingFangSC-Light;
+    font-family: PingFangSC-Light, sans-serif;
     font-weight: 300;
     color: rgba(51, 51, 51, 1);
 `
@@ -50,7 +50,7 @@ const Topic = styled.div`
     margin: 14px 0;
     flex: 1;
     font-size: 16px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(51, 51, 51, 1);
 `
@@ -59,7 +59,6 @@ const OptionWrap = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 60px;
 `
-
 const ItemCommon = styled.div`
     height: 1;
     width: 46px;
@@ -67,7 +66,7 @@ const ItemCommon = styled.div`
     justify-content: center;
     align-items: center;
     color: rgba(7, 41, 121, 1);
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     border-right: 1px solid #f5f5f5;
 `
@@ -83,7 +82,6 @@ const AnswerItem = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: stretch;
-    border-radius: 4px;
 `
 const AnswerWrap = styled.div<{ setMargin: boolean }>`
     display: flex;
@@ -102,7 +100,7 @@ const AnswerRichText = styled.div`
     display: flex;
     align-items: center;
     font-size: 18px;
-    font-family: PingFangSC-Regular, PingFang SC;
+    font-family: PingFangSC-Regular, PingFang SC, sans-serif;
     font-weight: 400;
     color: rgba(7, 41, 121, 1);
     margin: 0 10px;
@@ -113,7 +111,7 @@ const RichTextWrap = styled.div`
     align-items: center;
     padding: 8px 8px 8px 20px;
     font-size: 14px;
-    font-family: PingFangSC-Light;
+    font-family: PingFangSC-Light, sans-serif;
     font-weight: 300;
     color: rgba(51, 51, 51, 1);
 `
@@ -144,7 +142,7 @@ const Analysis = styled.div`
     box-sizing: border-box;
     border-bottom: 1px solid #dfdfdf;
     font-size: 18px;
-    font-family: PingFangSC-Medium, PingFang SC;
+    font-family: PingFangSC-Medium, PingFang SC, sans-serif;
     font-weight: 500;
     color: rgba(51, 51, 51, 1);
     padding: 8px 0px 8px 20px;
@@ -178,11 +176,11 @@ const ChoiceProblem: FC<Iprops> = props => {
     const [expandArr] = useState([
         {
             name: '展开',
-            icon: <FaAngleDoubleDown></FaAngleDoubleDown>,
+            icon: <FaAngleDoubleDown />,
         },
         {
             name: '收起',
-            icon: <FaAngleDoubleUp></FaAngleDoubleUp>,
+            icon: <FaAngleDoubleUp />,
         },
     ])
 
@@ -213,7 +211,7 @@ const ChoiceProblem: FC<Iprops> = props => {
                         showEditPick: props.data.showEditPick,
                     }}
                     onClickSelect={haneleClickSelect}
-                ></HeaderType>
+                />
                 <TopicWrap>
                     {(props.data.fraction || props.data.fraction === 0) && (
                         <TagWrap>
@@ -222,7 +220,7 @@ const ChoiceProblem: FC<Iprops> = props => {
                         </TagWrap>
                     )}
                     <Topic>
-                        <Editor value={Value.fromJSON(props.data.topic)} readonly></Editor>
+                        <Editor value={Value.fromJSON(props.data.topic)} readonly />
                     </Topic>
                 </TopicWrap>
                 <OptionWrap>
@@ -248,7 +246,7 @@ const ChoiceProblem: FC<Iprops> = props => {
                     <SolutionWrap>
                         <Analysis>解析</Analysis>
                         <RichTextWrap>
-                            <Editor value={Value.fromJSON(props.data.solution)} readonly></Editor>
+                            <Editor value={Value.fromJSON(props.data.solution)} readonly />
                         </RichTextWrap>
                     </SolutionWrap>
                 </>
