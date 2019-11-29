@@ -2,7 +2,6 @@ import React, { FC, useContext } from 'react'
 import styled from '@emotion/styled'
 import { MobXProviderContext } from 'mobx-react'
 import { useObserver } from 'mobx-react-lite'
-import { RouteComponentProps } from '@reach/router'
 
 import { IStore } from '../../../store'
 import SeeHeaderB from './SeeHeaderB'
@@ -15,15 +14,6 @@ import FractionListB from './FractionListB'
 import FractionListC from './FractionListC'
 import NoEntry from './NoEntry'
 
-export interface IProblems {
-    id: number
-    problemType: number
-    number: number
-    mark: number
-    studentAnswer: number
-    index: number
-}
-
 const Container = styled.div`
     width: 100%;
     margin-bottom: 20px;
@@ -35,38 +25,7 @@ const Package = styled.div`
     border-radius: 4px;
 `
 
-export interface IProblems {
-    id: number
-    problemType: number
-    number: number
-    mark: number
-    studentAnswer: number
-    index: number
-}
-
-interface IProps {
-    studentTestId: string
-    id: string
-}
-interface ILoreList {
-    id: number
-    name: string
-}
-interface IProblemList {
-    id?: number | 0
-    number: number
-    topic: any
-    answer: any
-    problemType: number
-    studentAnswer?: any
-    fraction?: number
-    option?: any
-    loreDTOList: ILoreList[]
-    solution: any
-    showEditPick?: number | 0
-}
-
-const ACenter: FC<RouteComponentProps<IProps>> = props => {
+const ACenter: FC = () => {
     const { courseIndexStore } = useContext<IStore>(MobXProviderContext)
 
     //处理数据
@@ -99,24 +58,24 @@ const ACenter: FC<RouteComponentProps<IProps>> = props => {
         return (
             <Container>
                 <SeeHeaderB></SeeHeaderB>
-                {courseIndexStore.testProblemDetailData.problemType === 1 ||
-                courseIndexStore.testProblemDetailData.problemType === 2 ? (
+                {(courseIndexStore.testProblemDetailData.problemType === 1 ||
+                    courseIndexStore.testProblemDetailData.problemType === 2) && (
                     <>
                         <FractionListA></FractionListA>
                         <Package>
                             <ChoiceProblem data={problemList()} />
                         </Package>
                     </>
-                ) : null}
-                {courseIndexStore.testProblemDetailData.problemType === 3 ? (
+                )}
+                {courseIndexStore.testProblemDetailData.problemType === 3 && (
                     <>
                         <FractionListA></FractionListA>
                         <Package>
                             <JudgeProblem data={problemList()} />
                         </Package>
                     </>
-                ) : null}
-                {courseIndexStore.testProblemDetailData.problemType === 4 ? (
+                )}
+                {courseIndexStore.testProblemDetailData.problemType === 4 && (
                     <>
                         {courseIndexStore.studentVolume.studentTestStatus !== 4 ? (
                             <NoEntry></NoEntry>
@@ -127,8 +86,8 @@ const ACenter: FC<RouteComponentProps<IProps>> = props => {
                             <FillingProblem data={problemList()} />
                         </Package>
                     </>
-                ) : null}
-                {courseIndexStore.testProblemDetailData.problemType === 5 ? (
+                )}
+                {courseIndexStore.testProblemDetailData.problemType === 5 && (
                     <>
                         {courseIndexStore.studentVolume.studentTestStatus !== 4 ? (
                             <NoEntry></NoEntry>
@@ -139,7 +98,7 @@ const ACenter: FC<RouteComponentProps<IProps>> = props => {
                             <ShortAnswerProblem data={problemList()} />
                         </Package>
                     </>
-                ) : null}
+                )}
             </Container>
         )
     })

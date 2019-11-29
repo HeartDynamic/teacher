@@ -3,7 +3,7 @@ import { MobXProviderContext } from 'mobx-react'
 import styled from '@emotion/styled'
 import { Link, RouteComponentProps } from '@reach/router'
 import { Value } from 'slate'
-import { append, remove } from 'ramda'
+import { append } from 'ramda'
 import { FaReply, FaRegEye, FaHistory } from 'react-icons/fa'
 
 import { IStore } from '../../store'
@@ -153,8 +153,9 @@ const NewPlan: FC<RouteComponentProps> = () => {
     const handleSelectPoint = (point: IPoint) => {
         if (!canSave) setCanSave(true)
         setSelectedPointsId(
-            selectedPointsId.includes(point.id) ? selectedPointsId.filter(x => x !== point.id) :
-                append(point.id, selectedPointsId)
+            selectedPointsId.includes(point.id)
+                ? selectedPointsId.filter(x => x !== point.id)
+                : append(point.id, selectedPointsId)
         )
         setSelectedPoints(
             selectedPoints.includes(point)

@@ -64,11 +64,8 @@ const HeaderType: FC<Iprops> = props => {
         props.onClickSelect()
     }
 
-    const buttonOption1 = {
-        height: '30px',
-        size: '14px',
-        weight: '400',
-        family: 'PingFangSC-Regular,PingFangSC',
+    const optionButton = {
+        height: '32px',
         bgColor: '#409EFF',
         shadow: '0px 4px 11px 0px rgba(64,158,255,0.5)',
     }
@@ -79,7 +76,7 @@ const HeaderType: FC<Iprops> = props => {
                     {typeArr[props.data.type - 1].slice(0, 2)}#{props.data.id}
                 </TypeNumber>
                 {props.data.loreList.map((item, index) => (
-                    <Knowledge key={item.id} data={{ ...item, index }}></Knowledge>
+                    <Knowledge key={item.id} data={item}></Knowledge>
                 ))}
             </KnowledgeWrap>
             {props.data.showEditPick === 1 ? (
@@ -87,7 +84,7 @@ const HeaderType: FC<Iprops> = props => {
                     <FiEdit></FiEdit>
                 </FontWrap>
             ) : props.data.showEditPick === 2 ? (
-                <Button options={buttonOption1} title='选择该题目' onClick={haneleClickSelect}>
+                <Button options={optionButton} onClick={haneleClickSelect}>
                     选择
                 </Button>
             ) : null}

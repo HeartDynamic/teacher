@@ -10,7 +10,7 @@ import { FaEye, FaStopCircle } from 'react-icons/fa'
 
 import { IStore } from '../../../../store'
 import Finished from '../../DetailCommon/Finished'
-import Student from './Student'
+import Student from '../../DetailCommon/Student'
 import Button from '../../../../components/Button'
 import Dialog from '../../../../components/Dialog'
 
@@ -72,16 +72,26 @@ const SituationWrap = styled.div`
     justify-content: space-between;
     padding: 30px 0;
 `
-
 const FunctWrap = styled.div`
+    width: 100%;
+    display: block;
     padding: 30px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    button:first-of-type {
+        margin-bottom: 20px;
+    }
 `
 const ButtonWrap = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
 `
-const ButtonText = styled.span``
+const ButtonText = styled.span`
+    margin-right: 8px;
+`
 const ButtonWrap1 = styled.div`
     display: flex;
     justify-content: space-around;
@@ -108,56 +118,18 @@ const Detail: FC = props => {
         // setIsShowSee(!isShowSee)
     }
 
-    const stopButton = {
-        width: '180px',
-        height: '50px',
-        size: '18px',
-        family: 'PingFangSC-Regular',
-        weight: '400',
-        bgColor: '#084DD0',
+    const optionButton = {
+        border: '1px solid #d9d9d9',
+        bgColor: '#fff',
         shadow: '0px 2px 4px 0px rgba(31,122,171,0.2)',
-        radius: '10px',
-        border: '3px solid rgba(255,255,255,1)',
-        HbgColor: '#285cbf',
+        color: 'rgba(0,0,0,0.65)',
+        HbgColor: '#fff',
+        HColor: '#3a93df',
+        HBorder: '1px solid #3a93df',
     }
-    const seeButton = {
-        width: '180px',
-        height: '50px',
-        size: '18px',
-        family: 'PingFangSC-Regular',
-        weight: '400',
-        bgColor: '#248BCB',
-        shadow: '0px 2px 4px 0px rgba(31,122,171,0.2)',
-        radius: '10px',
-        border: '3px solid rgba(255,255,255,1)',
-        HbgColor: '#2681b9',
-    }
-    const dialogButton = {
-        height: '50px',
-        size: '18px',
-        family: 'PingFangSC-Regular',
-        weight: '400',
-        bgColor: '#248BCB',
-        shadow: '0px 2px 4px 0px rgba(31,122,171,0.2)',
-        radius: '10px',
-        border: '3px solid rgba(255,255,255,1)',
-        HbgColor: '#2681b9',
-    }
-    const dialogButton1 = {
-        height: '50px',
-        size: '18px',
-        family: 'PingFangSC-Regular',
-        weight: '400',
-        bgColor: '#248BCB',
-        shadow: '0px 2px 4px 0px rgba(31,122,171,0.2)',
-        radius: '10px',
-        border: '3px solid rgba(255,255,255,1)',
-        HbgColor: '#2681b9',
-    }
+
     const optionDialog = {
         width: '20%',
-        // marginTop: '160px ',
-        borderBottom: ' 1px solid rgba(151, 151, 151, 0.26)',
     }
 
     return useObserver(() => {
@@ -167,31 +139,24 @@ const Detail: FC = props => {
                     <Header>
                         <TypeName>预习</TypeName>
                         <Vertical>|</Vertical>
-                        <TestName>{coursePreviewStore.preview && coursePreviewStore.preview.name}</TestName>
+                        <TestName>{coursePreviewStore.preview!.name}</TestName>
                     </Header>
                     <SituationWrap>
-                        <Finished
-                            text='已交'
-                            people={coursePreviewStore.doPreviewInfo && coursePreviewStore.doPreviewInfo.finished}
-                        />
-                        <Finished
-                            text='未交'
-                            people={coursePreviewStore.doPreviewInfo && coursePreviewStore.doPreviewInfo.Unfiltered}
-                        />
+                        <Finished text='已交' people={coursePreviewStore.doPreviewInfo!.finished} />
+                        <Finished text='未交' people={coursePreviewStore.doPreviewInfo!.Unfiltered} />
                     </SituationWrap>
-                    <Student />
+                    <Student data={coursePreviewStore.doPreviewInfo!.testDTOS} />
                 </Left>
                 <Right>
                     <Leisure></Leisure>
                     <FunctWrap>
-                        <Button options={stopButton} onClick={handleClickTestOver}>
+                        <Button onClick={handleClickTestOver}>
                             <ButtonWrap>
                                 <ButtonText>收卷</ButtonText>
                                 <FaStopCircle></FaStopCircle>
                             </ButtonWrap>
                         </Button>
-                        &nbsp;
-                        <Button options={seeButton} onClick={handleClickSee}>
+                        <Button onClick={handleClickSee}>
                             <ButtonWrap>
                                 <ButtonText>查看试卷</ButtonText>
                                 <FaEye></FaEye>
@@ -202,10 +167,8 @@ const Detail: FC = props => {
                 {isSshowOver && (
                     <Dialog title='收卷' options={optionDialog} onClickClose={handleClickTestOver}>
                         <ButtonWrap1>
-                            <Button options={dialogButton} onClick={handleClickTestOver1}>
-                                确定
-                            </Button>
-                            <Button options={dialogButton1} onClick={handleClickTestOver}>
+                            <Button onClick={handleClickTestOver1}>确定</Button>
+                            <Button options={optionButton} onClick={handleClickTestOver}>
                                 取消
                             </Button>
                         </ButtonWrap1>

@@ -5,6 +5,7 @@ import { FaAngleDoubleUp, FaAngleDoubleDown } from 'react-icons/fa'
 
 import Editor from '../EditorX'
 import HeaderType from './HeaderType'
+import Option from './Option'
 
 const Container = styled.div`
     box-sizing: border-box;
@@ -93,24 +94,7 @@ const OptionWrap = styled.div`
     grid-template-columns: 1fr 1fr;
     grid-column-gap: 60px;
 `
-const OptionItem = styled.div`
-    box-sizing: border-box;
-    min-height: 60px;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 1px solid rgba(42, 71, 139, 0.2);
-    margin-top: 8px;
-    margin-bottom: 8px;
-    border-radius: 4px;
-    font-size: 14px;
-    display: flex;
-    justify-content: flex-start;
-    align-items: stretch;
-    border-radius: 4px;
-`
-const ItemIndex = styled(ItemCommon)`
-    font-size: 18px;
-    background-color: rgba(245, 245, 245, 1);
-`
+
 const RichTextWrap = styled.div`
     display: flex;
     align-items: center;
@@ -233,12 +217,7 @@ const FillingProblem: FC<Iprops> = props => {
                             <ItemName>答案</ItemName>
                             <OptionWrap>
                                 {props.data.answer.map((v: { value: Value }, i: number) => (
-                                    <OptionItem key={i}>
-                                        <ItemIndex>{i + 1}</ItemIndex>
-                                        <RichTextWrap>
-                                            <Editor value={Value.fromJSON(v.value)} readonly></Editor>
-                                        </RichTextWrap>
-                                    </OptionItem>
+                                    <Option key={i} data={{ index: i + 1, value: v.value }}></Option>
                                 ))}
                             </OptionWrap>
                         </AnswerItem>
@@ -249,12 +228,7 @@ const FillingProblem: FC<Iprops> = props => {
                                 <ItemName>学生作答</ItemName>
                                 <OptionWrap>
                                     {props.data.studentAnswer.map((v: { value: Value }, i: number) => (
-                                        <OptionItem key={i}>
-                                            <ItemIndex>{i + 1}</ItemIndex>
-                                            <RichTextWrap>
-                                                <Editor value={Value.fromJSON(v.value)} readonly></Editor>
-                                            </RichTextWrap>
-                                        </OptionItem>
+                                        <Option key={i} data={{ index: i + 1, value: v.value }}></Option>
                                     ))}
                                 </OptionWrap>
                             </AnswerItem>

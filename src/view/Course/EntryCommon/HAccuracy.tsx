@@ -1,6 +1,5 @@
 import React, { FC } from 'react'
 import styled from '@emotion/styled'
-import { useObserver } from 'mobx-react-lite'
 
 const Container = styled.div`
     width: 100%;
@@ -32,14 +31,12 @@ interface IParams {
     }
 }
 const HAccuracy: FC<IParams> = props => {
-    return useObserver(() => {
-        return (
-            <Container>
-                <Left Color={props.data.Color}>{props.data.name}</Left>
-                <Right Color={props.data.Color1}>{props.data.people}</Right>
-            </Container>
-        )
-    })
+    return (
+        <Container>
+            <Left Color={props.data.Color}>{props.data.name}</Left>
+            <Right Color={props.data.Color1}>{props.data.people}</Right>
+        </Container>
+    )
 }
 
 export default HAccuracy
