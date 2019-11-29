@@ -8,10 +8,10 @@ import {
     FaListOl,
     FaListUl,
     FaRegImage,
-    FaTable,
+    // FaTable,
     FaCode,
-    FaUndo,
-    FaRedo,
+    // FaUndo,
+    // FaRedo,
 } from 'react-icons/fa'
 import { GiOmega } from 'react-icons/gi'
 import { Value } from 'slate'
@@ -94,9 +94,9 @@ const ToolBar: FC<IProps> = ({ hasMark, onClickMark, hasBlock, value, onClickBlo
                 <Button title='图片' active={hasMark('image')} onClick={event => onClickInline(event, 'image')}>
                     <FaRegImage />
                 </Button>
-                <Button title='表格' active={hasMark('table')} onClick={event => onClickBlock(event, 'table')}>
-                    <FaTable />
-                </Button>
+                {/*<Button title='表格' active={hasMark('table')} onClick={event => onClickBlock(event, 'table')}>*/}
+                {/*    <FaTable />*/}
+                {/*</Button>*/}
                 <Button title='代码' active={hasMark('code')} onClick={event => onClickMark(event, 'code')}>
                     <FaCode />
                 </Button>
@@ -104,14 +104,14 @@ const ToolBar: FC<IProps> = ({ hasMark, onClickMark, hasBlock, value, onClickBlo
                     <GiOmega />
                 </Button>
             </ButtonGroup>
-            <ButtonGroup>
-                <Button title='撤销' active={hasMark('undo')} onClick={event => onClickMark(event, 'undo')}>
-                    <FaUndo />
-                </Button>
-                <Button title='重做' active={hasMark('redo')} onClick={event => onClickMark(event, 'redo')}>
-                    <FaRedo />
-                </Button>
-            </ButtonGroup>
+            {/*<ButtonGroup>*/}
+            {/*    <Button title='撤销' active={hasMark('undo')} onClick={event => onClickMark(event, 'undo')}>*/}
+            {/*        <FaUndo />*/}
+            {/*    </Button>*/}
+            {/*    <Button title='重做' active={hasMark('redo')} onClick={event => onClickMark(event, 'redo')}>*/}
+            {/*        <FaRedo />*/}
+            {/*    </Button>*/}
+            {/*</ButtonGroup>*/}
         </Container>
     )
 }
