@@ -111,6 +111,7 @@ const Detail: FC = () => {
 
     //查看试卷
     const handleClickSee = () => {
+        sessionStorage.removeItem('sessionCurrentType')
         navigate(`task/analysis/${courseTaskStore.task!.id}`)
     }
 

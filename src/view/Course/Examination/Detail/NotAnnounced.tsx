@@ -111,6 +111,7 @@ const Detail: FC = props => {
 
     //查看试卷
     const handleClickSee = () => {
+        sessionStorage.removeItem('sessionCurrentType')
         navigate(`examination/analysis/${courseExaminationStore.examination!.id}`)
     }
 

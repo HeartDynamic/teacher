@@ -199,7 +199,7 @@ function PreviewList(props: IProps) {
                     ></Input>
                 </SearchWrap>
                 {volumeStore.problemList.length ? (
-                    volumeStore.problemList.map((item, index) => (
+                    volumeStore.problemList.map(item => (
                         <PreviewWrap key={item.id}>
                             <QuestionType data={problemList(item)} onClickSelect={handleClickSelect}></QuestionType>
                         </PreviewWrap>

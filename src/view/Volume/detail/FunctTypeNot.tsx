@@ -44,7 +44,7 @@ function FunctTypeNot(props: IProps) {
         <Container>
             <Left>
                 <ButtonWrap setWidth='88px'></ButtonWrap>
-                <ButtonWrap setWidth='82px'></ButtonWrap>
+                <ButtonWrap setWidth='80px'></ButtonWrap>
                 <ButtonWrap>
                     <Button options={optionButton} onClick={handleClickIsShow}>
                         修改试卷结构
