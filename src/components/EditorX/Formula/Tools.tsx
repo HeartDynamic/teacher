@@ -118,7 +118,7 @@ const arr2 = [
     { name: 'varnothing', cmd: '\\varnothing', type: 'write', title: '空集' },
     { name: 'cap', cmd: '\\cap', type: 'write', title: '交集' },
     { name: 'cup', cmd: '\\cup', type: 'write', title: '并集' },
-    { name: 'infinity', cmd: '\\infty', type: 'write', title: '无穷' },
+    { name: 'infinitas', cmd: '\\infty', type: 'write', title: '无穷' },
 ]
 const arr3 = [
     { name: 'frac', cmd: '\\frac', type: 'cmd', title: '分式' },
