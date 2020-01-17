@@ -17,6 +17,7 @@ import ClassTest from '../view/Course/ClassTest'
 import Task from '../view/Course/Task'
 import Examination from '../view/Course/Examination'
 import VolumeDetail from './Volume/detail'
+import Print from './Print'
 import Analysis from './Analysis'
 import WhiteBoard from '../view/Course/WhiteBoard'
 import OverallAnalysis from './Analysis/Overall'
@@ -32,27 +33,28 @@ const MyRouter = styled(Router)`
 const App: FC = () => {
     return (
         <MyRouter>
-            <MainRouter path='/*'/>
-            <PlanEditor path='plan/:planId'/>
-            <NewPlan path='plan/new'/>
-            <WhiteBoard path='/course/:courseId/white-board'/>
+            <MainRouter path='/*' />
+            <PlanEditor path='plan/:planId' />
+            <NewPlan path='plan/new' />
+            <WhiteBoard path='/course/:courseId/white-board' />
             <Course path='/course/'>
                 <Index path=':courseId'>
-                    <Plan path='plan'/>
-                    <Preparation path='preparation'/>
-                    <Preview path='preview'/>
-                    <ClassTest path='classTest'/>
-                    <Task path='task'/>
-                    <Examination path='examination'/>
+                    <Plan path='plan' />
+                    <Preparation path='preparation' />
+                    <Preview path='preview' />
+                    <ClassTest path='classTest' />
+                    <Task path='task' />
+                    <Examination path='examination' />
                 </Index>
             </Course>
-            <VolumeDetail path='see/volume/:id'/>
-            <NewPreparation path='/course/:courseId/preparation/new'/>
-            <KnowledgeAnalysis path='/analysis/knowledge'/>
+            <VolumeDetail path='see/volume/:id' />
+            <Print path='volume/print/:id' />
+            <NewPreparation path='/course/:courseId/preparation/new' />
+            <KnowledgeAnalysis path='/analysis/knowledge' />
             <Analysis path='/analysis'>
-                <OverallAnalysis path='/'/>
-                <PersonalAnalysis path='student/:studentId'/>
-                <ClassAnalysis path='class/:studentId'/>
+                <OverallAnalysis path='/' />
+                <PersonalAnalysis path='student/:studentId' />
+                <ClassAnalysis path='class/:studentId' />
             </Analysis>
             <PasswordReset path='password-reset'/>
         </MyRouter>

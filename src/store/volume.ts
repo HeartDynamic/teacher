@@ -94,6 +94,8 @@ interface IProblemsType {
     problemType: number
     state: number
     fraction?: number
+    topic?: any
+    option?: any
 }
 interface IProblemTypeIsExit {
     typeName: string

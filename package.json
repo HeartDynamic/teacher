@@ -43,6 +43,7 @@
         "react-scripts": "3.2.0",
         "react-sketch": "^0.5.1",
         "react-slider": "^1.0.1",
+        "react-to-print": "^2.5.1",
         "screenfull": "^5.0.0",
         "slate": "^0.47.9",
         "slate-react": "^0.22.10",

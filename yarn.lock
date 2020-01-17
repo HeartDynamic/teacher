@@ -8835,6 +8835,13 @@ react-slider@^1.0.1:
   resolved "https://registry.npm.taobao.org/react-slider/download/react-slider-1.0.1.tgz#4cb212d31c35d804805e31f02ce37771e95d5d45"
   integrity sha1-TLIS0xw12ASAXjHwLON3celdXUU=
 
+react-to-print@^2.5.1:
+  version "2.5.1"
+  resolved "https://registry.npm.taobao.org/react-to-print/download/react-to-print-2.5.1.tgz#eaaff4248910f179788ab15a593ceb3e07527b8c"
+  integrity sha1-6q/0JIkQ8Xl4irFaWTzrPgdSe4w=
+  dependencies:
+    prop-types "^15.7.2"
+
 react@^16.11.0, react@^16.9.0:
   version "16.11.0"
   resolved "https://registry.npm.taobao.org/react/download/react-16.11.0.tgz#d294545fe62299ccee83363599bf904e4a07fdbb"
