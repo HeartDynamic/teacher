@@ -38,7 +38,6 @@ instance.interceptors.response.use(
         return config
     },
     function(error) {
-        Toast.error('需要重新')
         // 对请求错误做些什么
         if (error && error.response.data.code === 4004) {
             if (isError) {
@@ -60,6 +59,8 @@ instance.interceptors.response.use(
             window.location.href =
                 process.env.NODE_ENV === 'production' ? 'https://www.likeyun.net' : 'http://localhost:1234'
             isError = false
+        } else {
+            Toast.error(error.response.data.message)
         }
     }
 )
@@ -111,6 +112,7 @@ const auth = {
     getCaptcha: () => request.get('/captchas/base64'),
     getRefreshToken: () => request.get('/refresh-token'),
     logOut: () => request.del('/logout'),
+    passwordReset: (data: any) => request.put('/password-reset', data),
 }
 const user = {
     getUserInfo: () => request.get('/user-info'),

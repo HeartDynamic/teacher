@@ -71,12 +71,12 @@ const InfoBox = styled.div`
     flex-direction: column;
     justify-content: space-between;
 `
-const Realname = styled.div`
+const RealName = styled.div`
     font-size: 14px;
     font-weight: bold;
     color: #000;
 `
-const Username = styled(Realname)`
+const Username = styled(RealName)`
     font-size: 12px;
     color: #00a6f3;
     font-weight: normal;
@@ -147,13 +147,13 @@ const Menu: FC<IProps> = props => {
                     <FaUserTie />
                 </Avatar>
                 <InfoBox>
-                    <Realname>{userStore.userInfo.realName}</Realname>
+                    <RealName>{userStore.userInfo.realName}</RealName>
                     <SchoolName>{userStore.userInfo.schoolName}</SchoolName>
                     <Username>{userStore.userInfo.username}</Username>
                 </InfoBox>
             </Top>
             <Bottom>
-                <MyLink to='/password-reset'>个人中心</MyLink>
+                <MyLink to='/password-reset'>修改密码</MyLink>
                 <MyLogOut onClick={handleClickLogOut}>退出登录</MyLogOut>
             </Bottom>
         </Container>

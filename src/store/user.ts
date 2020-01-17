@@ -11,15 +11,39 @@ interface IUserInfo {
     schoolName: string
 }
 
+interface ICaptcha {
+    base64: string
+    capText: string
+    key: string
+}
+
+interface IPasswdReset {
+    password: string
+    passwordReset: string
+    key: string
+    captcha: string
+}
+
 export interface IUserStore {
     userInfoReady: boolean
     username: string
     userInfo: IUserInfo
     getUserInfo(): Promise<void>
     logOut(): Promise<void>
+    getCaptcha(): Promise<void>
+    captcha: ICaptcha | null
+    captchaImgMsg: string
+    captchaReady: boolean
+    isChangingPassword: boolean
+    doChangePasswd(data: IPasswdReset): Promise<string | undefined>
 }
 
 class UserStore implements IUserStore {
+    @observable captchaImgMsg = ''
+
+    @observable isChangingPassword = false
+    @observable captcha = null
+    @observable captchaReady = false
     @observable userInfoReady = false
     @observable username = Cookies.get('username') || ''
     @observable userInfo: IUserInfo = {
@@ -52,6 +76,29 @@ class UserStore implements IUserStore {
                     process.env.NODE_ENV === 'production' ? 'https://www.likeyun.net' : 'http://localhost:1234'
             }
         } catch (error) {}
+    }
+
+    @action async getCaptcha() {
+        this.captchaReady = false
+        try {
+            const res = await api.auth.getCaptcha()
+            if (res.success) {
+                this.captcha = res.data
+                this.captchaReady = true
+            }
+        } catch (e) {}
+    }
+
+    @action async doChangePasswd(data: IPasswdReset) {
+        this.isChangingPassword = true
+        try {
+            const res = await api.auth.passwordReset(data)
+            console.log(res)
+            if (res.success) {
+                this.isChangingPassword = false
+                return Promise.resolve('ok')
+            }
+        } catch (e) {}
     }
 }
 

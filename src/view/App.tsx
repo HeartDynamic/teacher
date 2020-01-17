@@ -24,6 +24,7 @@ import OverallAnalysis from './Analysis/Overall'
 import PersonalAnalysis from './Course/PersonalAnalysis'
 import ClassAnalysis from './Analysis/Overall/Class'
 import KnowledgeAnalysis from './Analysis/Knowledge'
+import PasswordReset from '../components/Header/PasswordReset'
 
 const MyRouter = styled(Router)`
     height: 100%;
@@ -55,6 +56,7 @@ const App: FC = () => {
                 <PersonalAnalysis path='student/:studentId' />
                 <ClassAnalysis path='class/:studentId' />
             </Analysis>
+            <PasswordReset path='password-reset'/>
         </MyRouter>
     )
 }
