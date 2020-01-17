@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect, useRef, useState } from 'react'
-import { RouteComponentProps } from '@reach/router'
+import { RouteComponentProps, navigate } from '@reach/router'
 import { MobXProviderContext } from 'mobx-react'
 import { useObserver } from 'mobx-react-lite'
 import ReactToPrint from 'react-to-print'
@@ -98,6 +98,7 @@ const Span2 = styled(Span)``
 
 interface IProps {
     id: string
+    linkData: string
 }
 
 const Volume: FC<RouteComponentProps<IProps>> = props => {
@@ -118,11 +119,18 @@ const Volume: FC<RouteComponentProps<IProps>> = props => {
         setCurrent(type)
     }
 
+    const handleClickLine = () => {
+        navigate(props.location!.state.linkData)
+    }
+
     return useObserver(() => {
         return (
             <Container>
                 <Ul>
                     <Li>
+                        <Title key={0} setStyle={current === 0} onClick={handleClickLine}>
+                            返回
+                        </Title>
                         <Title key={1} setStyle={current === 1} onClick={() => handleClickType(1)}>
                             题目
                         </Title>
