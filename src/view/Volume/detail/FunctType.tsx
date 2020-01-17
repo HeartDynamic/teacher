@@ -198,7 +198,9 @@ function FunctType(props: IProps) {
     // )
     // }
     const handleClickPrint = () => {
-        navigate(`/volume/print/${volumeStore.volumeDetailList.id}`)
+        navigate(`/volume/print/${volumeStore.volumeDetailList.id}`, {
+            state: { linkData: `/see/volume/${volumeStore.volumeDetailList.id}` },
+        })
     }
 
     //输入验证
