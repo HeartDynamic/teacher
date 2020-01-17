@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react'
 import { MobXProviderContext } from 'mobx-react'
 import { useObserver } from 'mobx-react-lite'
+import { navigate } from '@reach/router'
 import styled from '@emotion/styled'
 import { FaSave, FaExchangeAlt, FaMinusCircle, FaEye } from 'react-icons/fa'
 // FaChevronLeft, FaChevronRight
@@ -196,6 +197,9 @@ function FunctType(props: IProps) {
     //     volumeStore.volumeProblem.number
     // )
     // }
+    const handleClickPrint = () => {
+        navigate(`/volume/print/${volumeStore.volumeDetailList.id}`)
+    }
 
     //输入验证
     const checkForm = (data: any) => {
@@ -316,6 +320,11 @@ function FunctType(props: IProps) {
                         <ButtonWrap>
                             <Button options={optionButton2} onClick={handleClickOutline}>
                                 修改试卷结构
+                            </Button>
+                        </ButtonWrap>
+                        <ButtonWrap>
+                            <Button options={optionButton2} onClick={handleClickPrint}>
+                                打印试卷
                             </Button>
                         </ButtonWrap>
                         {props.isShowIcon && (

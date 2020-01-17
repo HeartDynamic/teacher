@@ -17,6 +17,7 @@ import ClassTest from '../view/Course/ClassTest'
 import Task from '../view/Course/Task'
 import Examination from '../view/Course/Examination'
 import VolumeDetail from './Volume/detail'
+import Print from './Print'
 import Analysis from './Analysis'
 import WhiteBoard from '../view/Course/WhiteBoard'
 import OverallAnalysis from './Analysis/Overall'
@@ -46,6 +47,7 @@ const App: FC = () => {
                 </Index>
             </Course>
             <VolumeDetail path='see/volume/:id' />
+            <Print path='volume/print/:id' />
             <NewPreparation path='/course/:courseId/preparation/new' />
             <KnowledgeAnalysis path='/analysis/knowledge' />
             <Analysis path='/analysis'>
